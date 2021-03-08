@@ -10,6 +10,7 @@ import sample.Service.Battle;
 import sample.Service.Painter;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class Controller {
 
@@ -35,7 +36,8 @@ public class Controller {
 
     public void makeThisShitWorks() {
         try {
-            if (getFirstSquadName().equals("") || getSecondSquadName().equals("")) throw new Exception();
+            if (getConditionOverHere(getFirstSquadName(), getSecondSquadName()))
+            /*if (getFirstSquadName().equals("") || getSecondSquadName().equals(""))*/ throw new Exception();
             try {
                 if (getFirstSquadName().equals(getSecondSquadName())) throw new IOException();
                 Battle battle = new Battle(getFirstSquadName(), getSecondSquadName());
@@ -61,6 +63,14 @@ public class Controller {
             outputWindow.setText(Painter.getPainted("Ошибка! Введите названия отрядов!",
                     Painter.Paint.ANSI_BOLD));
         }
+    }
+
+    private static boolean getConditionOverHere(String firstSquadName, String secondSquadName){
+        boolean isNameNotValid = true;
+        Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я]+");
+        if(pattern.matcher(firstSquadName).matches()&&pattern.matcher(secondSquadName).matches())
+            isNameNotValid = false;
+        return isNameNotValid;
     }
 
     private static String getResult(Squad squad) {
