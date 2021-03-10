@@ -31,16 +31,11 @@ public class Controller {
     }
 
     public void makeThisShitWorks() {
-        if (getConditionOverHere(getFirstSquadName(), getSecondSquadName())) {
-            outputWindow.setText("Ошибка! Введите названия отрядов!");
-            firstSquad.clear();
-            secondSquad.clear();
-        }
-        else if (getFirstSquadName().equals(getSecondSquadName())) {
+        if (getConditionOverHere(getFirstSquadName(), getSecondSquadName()))
+            outputWindow.setText("Ошибка! Введите названия отрядов!\n" +
+                    "Знаки препинания и пробелы в именах запрещены!");
+        else if (getFirstSquadName().equals(getSecondSquadName()))
             outputWindow.setText("Ошибка! Имена отрядов должны различаться!");
-            firstSquad.clear();
-            secondSquad.clear();
-        }
         else {
             Battle battle = new Battle(getFirstSquadName(), getSecondSquadName());
             outputWindow.setText(battle.getDateHelper().getFormattedStartDate() +
@@ -58,6 +53,14 @@ public class Controller {
             outputWindow.appendText("\n" + "Битва продолжалась " +
                     battle.getDateHelper().getFormattedDiff());
         }
+    }
+
+    public void makeFirstSquadFieldBetter(){
+        firstSquad.clear();
+    }
+
+    public void makeSecondSquadFieldBetter(){
+        secondSquad.clear();
     }
 
     private static boolean getConditionOverHere(String firstSquadName, String secondSquadName) {

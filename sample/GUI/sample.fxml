@@ -5,9 +5,9 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.Controller">
    <HBox prefHeight="18.0" prefWidth="600.0">
-      <TextField fx:id="firstSquad" promptText="Первый отряд" />
-      <TextField fx:id="secondSquad" promptText="Второй отряд" />
+      <TextField fx:id="firstSquad" onMouseClicked="#makeFirstSquadFieldBetter" promptText="Первый отряд" />
+      <TextField fx:id="secondSquad" onMouseClicked="#makeSecondSquadFieldBetter" promptText="Второй отряд" />
       <Button mnemonicParsing="false" onAction="#makeThisShitWorks" text="Старт" />
    </HBox>
-   <TextArea fx:id="outputWindow" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+   <TextArea fx:id="outputWindow" editable="false" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
 </VBox>
