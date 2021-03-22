@@ -1,7 +1,10 @@
 package sample.Service;
 
+import javafx.collections.FXCollections;
+import javafx.scene.control.ChoiceBox;
 import sample.BackEnd.DateHelper;
 import sample.BackEnd.Squads.Squad;
+import sample.BackEnd.Squads.Units.Race;
 import sample.BackEnd.Squads.Units.Unit;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -65,5 +68,16 @@ public class Battle {
         Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я0-9]+");
         return (!pattern.matcher(firstSquadName).matches() ||
                 !pattern.matcher(secondSquadName).matches());
+    }
+
+    public static void initialize(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox){
+        raceChoiceBox.setItems(FXCollections.observableArrayList(getRaces()));
+        classChoiceBox.setItems(FXCollections.observableArrayList("Воин", "Лучник", "Маг"));
+    }
+
+    private static ArrayList<String> getRaces(){
+        ArrayList<String> races = new ArrayList<>();
+        for(Race race: Race.values()) races.add(race.name);
+        return races;
     }
 }

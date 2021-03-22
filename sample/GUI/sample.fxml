@@ -9,5 +9,14 @@
       <TextField fx:id="secondSquad" onMouseClicked="#makeSecondSquadFieldBetter" promptText="Второй отряд" />
       <Button mnemonicParsing="false" onAction="#makeThisShitWorks" text="Старт" />
    </HBox>
+   <HBox prefHeight="102.0" prefWidth="600.0">
+      <VBox prefHeight="108.0" prefWidth="232.0">
+         <ChoiceBox fx:id="raceChoiceBox" prefWidth="150.0" />
+         <ChoiceBox fx:id="classChoiceBox" prefWidth="150.0" />
+         <Button mnemonicParsing="false" text="Добавить в первый отряд" />
+         <Button mnemonicParsing="false" text="Добавить во второй отряд" />
+      </VBox>
+      <TextArea prefHeight="108.0" prefWidth="365.0" HBox.hgrow="ALWAYS" />
+   </HBox>
    <TextArea fx:id="outputWindow" editable="false" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
 </VBox>

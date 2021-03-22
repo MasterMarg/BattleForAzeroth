@@ -1,6 +1,7 @@
 package sample.GUI;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import sample.Service.Battle;
@@ -13,8 +14,13 @@ public class Controller {
     private TextField firstSquad;
     @FXML
     private TextField secondSquad;
+    @FXML
+    private ChoiceBox raceChoiceBox;
+    @FXML
+    private ChoiceBox classChoiceBox;
 
     public void initialize() {
+        Battle.initialize(raceChoiceBox, classChoiceBox);
     }
 
     @FXML
