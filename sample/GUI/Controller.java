@@ -72,9 +72,8 @@ public class Controller {
         else if (getFirstSquadName().equals(getSecondSquadName()))
             outputWindow.setText("Ошибка! Имена отрядов должны различаться!");
         else {
-            Battle.addToRedSquad(raceChoiceBox, classChoiceBox, getFirstSquadName());
-            outputWindow.setText(raceChoiceBox.getValue() + " " + classChoiceBox.getValue() +
-                    " добавлен в первый отряд.");
+            outputWindow.setText(Battle.addToRedSquad(raceChoiceBox, classChoiceBox,
+                    getFirstSquadName()).getClassName() + " добавлен в первый отряд.");
         }
     }
 
@@ -86,9 +85,8 @@ public class Controller {
         else if (getFirstSquadName().equals(getSecondSquadName()))
             outputWindow.setText("Ошибка! Имена отрядов должны различаться!");
         else {
-            Battle.addToBlueSquad(raceChoiceBox, classChoiceBox, getSecondSquadName());
-            outputWindow.setText(raceChoiceBox.getValue() + " " + classChoiceBox.getValue() +
-                    " добавлен во второй отряд.");
+            outputWindow.setText(Battle.addToBlueSquad(raceChoiceBox, classChoiceBox,
+                    getSecondSquadName()).getClassName() + " добавлен во второй отряд.");
         }
     }
 

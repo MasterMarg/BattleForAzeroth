@@ -77,21 +77,23 @@ public class Battle {
         return (!pattern.matcher(name).matches());
     }
 
-    public static void addToRedSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
+    public static Unit addToRedSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
         if (redSquad == null || !redSquad.toString().equals(name)) redSquad = new Squad(name);
         Unit unit = createUnit(raceChoiceBox, classChoiceBox);
         unit.setSquadName(redSquad.toString());
         redSquad.addUnit(unit);
+        return unit;
     }
 
-    public static void addToBlueSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
+    public static Unit addToBlueSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
         if (blueSquad == null || !blueSquad.toString().equals(name)) blueSquad = new Squad(name);
         Unit unit = createUnit(raceChoiceBox, classChoiceBox);
         unit.setSquadName(blueSquad.toString());
         blueSquad.addUnit(unit);
+        return unit;
     }
 
-    private static Unit createUnit(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox) {
+    public static Unit createUnit(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox) {
         Race ourRace = (Race) raceChoiceBox.getValue();
         Unit unit = new Warrior(ourRace);
         if (classChoiceBox.getValue().equals("Лучник")) unit = new Archer(ourRace);

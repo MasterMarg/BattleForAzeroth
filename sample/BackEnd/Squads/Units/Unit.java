@@ -25,4 +25,6 @@ public interface Unit {
     int getDefense();
 
     int getResistance();
+
+    String getClassName();
 }

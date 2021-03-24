@@ -108,4 +108,8 @@ public class Mage implements Unit, Cloneable {
     public int getResistance(){
         return this.resistance;
     }
+
+    public String getClassName(){
+        return this.className;
+    }
 }
