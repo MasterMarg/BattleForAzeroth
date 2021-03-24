@@ -116,4 +116,8 @@ public class Mage implements Unit, Cloneable {
     public int getCriticalChance(){
         return (int)(5 * this.race.intelligence * intelligenceModifier / 10);
     }
+
+    public void restoreUnit() {
+        this.currentVitality = this.vitality;
+    }
 }

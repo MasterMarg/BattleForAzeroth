@@ -79,6 +79,7 @@ public class Squad implements Cloneable {
     }
 
     public void addUnit(Unit unit){
+        unit.setSquadName(this.name);
         this.units.add(unit);
     }
 
@@ -87,7 +88,7 @@ public class Squad implements Cloneable {
         return this.name;
     }
 
-    public boolean isEmpty(){
-        return this.units.isEmpty();
+    public ArrayList<Unit> getUnits(){
+        return this.units;
     }
 }

@@ -116,4 +116,8 @@ public class Warrior implements Unit, Cloneable {
     public int getCriticalChance(){
         return (int)(5 * this.race.dexterity * dexterityModifier / 10);
     }
+
+    public void restoreUnit() {
+        this.currentVitality = this.vitality;
+    }
 }

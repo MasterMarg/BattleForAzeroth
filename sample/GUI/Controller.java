@@ -45,13 +45,15 @@ public class Controller {
                     "Знаки препинания и пробелы в именах запрещены!");
         else if (getFirstSquadName().equals(getSecondSquadName()))
             outputWindow.setText("Ошибка! Имена отрядов должны различаться!");
-        else if (Battle.getRedSquad().isEmpty())
+        else if (Battle.getRedSquad() == null || !Battle.getRedSquad().hasAliveUnits()
+                || !Battle.getRedSquad().toString().equals(getFirstSquadName()))
             outputWindow.setText("В первом отряде недостаточно бойцов!");
-        else if (Battle.getBlueSquad().isEmpty())
+        else if (Battle.getBlueSquad() == null || !Battle.getBlueSquad().hasAliveUnits()
+                || !Battle.getBlueSquad().toString().equals(getSecondSquadName()))
             outputWindow.setText("Во втором отряде недостаточно бойцов!");
         else {
             outputWindow.clear();
-            for (String string : Battle.provideBattle(getFirstSquadName(), getSecondSquadName()))
+            for (String string : Battle.provideBattle(/*getFirstSquadName(), getSecondSquadName()*/))
                 outputWindow.appendText(string);
         }
     }
@@ -65,29 +67,31 @@ public class Controller {
     }
 
     public void addToFirstSquad() {
-        if (Battle.getConditionOverHere(getFirstSquadName()) ||
-                Battle.getConditionOverHere(getSecondSquadName()))
-            outputWindow.setText("Ошибка! Введите названия отрядов!\n" +
+        if (Battle.getConditionOverHere(getFirstSquadName()))
+            outputWindow.setText("Ошибка! Введите название первого отряда!\n" +
                     "Знаки препинания и пробелы в именах запрещены!");
         else if (getFirstSquadName().equals(getSecondSquadName()))
             outputWindow.setText("Ошибка! Имена отрядов должны различаться!");
         else {
-            outputWindow.setText(Battle.addToRedSquad(raceChoiceBox, classChoiceBox,
-                    getFirstSquadName()).getClassName() + " добавлен в первый отряд.");
+            outputWindow.setText(Battle.addToRedSquad(raceChoiceBox, classChoiceBox, getFirstSquadName()));
         }
     }
 
     public void addToSecondSquad() {
-        if (Battle.getConditionOverHere(getFirstSquadName()) ||
-                Battle.getConditionOverHere(getSecondSquadName()))
-            outputWindow.setText("Ошибка! Введите названия отрядов!\n" +
+        if (Battle.getConditionOverHere(getSecondSquadName()))
+            outputWindow.setText("Ошибка! Введите назваие второго отряда!\n" +
                     "Знаки препинания и пробелы в именах запрещены!");
         else if (getFirstSquadName().equals(getSecondSquadName()))
             outputWindow.setText("Ошибка! Имена отрядов должны различаться!");
         else {
-            outputWindow.setText(Battle.addToBlueSquad(raceChoiceBox, classChoiceBox,
-                    getSecondSquadName()).getClassName() + " добавлен во второй отряд.");
+            outputWindow.setText(Battle.addToBlueSquad(raceChoiceBox, classChoiceBox, getSecondSquadName()));
         }
+    }
+
+    public void reviveTheFallen() {
+        if (Battle.getRedSquad() == null && Battle.getBlueSquad() == null)
+            outputWindow.setText("Отряды не сформированы, некого лечить...");
+        else Battle.reviveTheFallen();
     }
 
     public void makeFirstSquadFieldBetter() {

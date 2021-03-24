@@ -29,4 +29,6 @@ public interface Unit {
     String getClassName();
 
     int getCriticalChance();
+
+    void restoreUnit();
 }
