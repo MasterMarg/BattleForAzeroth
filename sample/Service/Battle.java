@@ -106,12 +106,13 @@ public class Battle {
         list.add("Раса: " + raceChoiceBox.getValue());
         list.add("\nКласс: " + classChoiceBox.getValue());
         Unit unit = createUnit(raceChoiceBox, classChoiceBox);
+        list.add("\nКлассовое имя: " + unit.getClassName());
         list.add("\nСила: " + unit.getStrength());
         list.add("\nЛовкость: " + unit.getDexterity());
         list.add("\nИнтеллект: " + unit.getIntelligence());
         list.add("\nЗдоровье: " + unit.getVitality());
         list.add("\nУрон: " + unit.attack()[0]);
-        list.add("\nШанс критического удара: " + unit.getCriticalChance());
+        list.add("\nШанс критического удара: " + unit.getCriticalChance() + "%");
         list.add("\nЗащита: " + unit.getDefense());
         list.add("\nСопротивление: " + unit.getResistance());
         return list;
