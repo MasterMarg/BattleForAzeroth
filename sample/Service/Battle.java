@@ -1,20 +1,25 @@
 package sample.Service;
 
-import javafx.collections.FXCollections;
 import javafx.scene.control.ChoiceBox;
 import sample.BackEnd.DateHelper;
 import sample.BackEnd.Squads.Squad;
+import sample.BackEnd.Squads.Units.Classes.Archer;
+import sample.BackEnd.Squads.Units.Classes.Mage;
+import sample.BackEnd.Squads.Units.Classes.Warrior;
 import sample.BackEnd.Squads.Units.Race;
 import sample.BackEnd.Squads.Units.Unit;
+
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Battle {
+    public static Squad redSquad;
+    public static Squad blueSquad;
 
     public static ArrayList<String> provideBattle(String firstSquad, String secondSquad) {
         DateHelper dateHelper = new DateHelper();
-        Squad redSquad = new Squad(firstSquad);
-        Squad blueSquad = new Squad(secondSquad);
+        if (redSquad == null) redSquad = new Squad(firstSquad);
+        if (blueSquad == null) blueSquad = new Squad(secondSquad);
         ArrayList<String> output = new ArrayList<>();
         output.add(dateHelper.getFormattedStartDate() +
                 "\nБитва началась!\n");
@@ -55,29 +60,64 @@ public class Battle {
     private static String reformString(int input) {
         if (input % 100 > 20 || input % 100 < 10) {
             switch (input % 10) {
-                case 1: return " единицу";
+                case 1:
+                    return " единицу";
                 case 2:
                 case 3:
-                case 4: return " единицы";
-                default: return " единиц";
+                case 4:
+                    return " единицы";
+                default:
+                    return " единиц";
             }
         } else return " единиц";
     }
 
-    public static boolean getConditionOverHere(String firstSquadName, String secondSquadName) {
+    public static boolean getConditionOverHere(String name) {
         Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я0-9]+");
-        return (!pattern.matcher(firstSquadName).matches() ||
-                !pattern.matcher(secondSquadName).matches());
+        return (!pattern.matcher(name).matches());
     }
 
-    public static void initialize(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox){
-        raceChoiceBox.setItems(FXCollections.observableArrayList(getRaces()));
-        classChoiceBox.setItems(FXCollections.observableArrayList("Воин", "Лучник", "Маг"));
+    public static void addToRedSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
+        if (redSquad == null || !redSquad.toString().equals(name)) redSquad = new Squad(name);
+        Unit unit = createUnit(raceChoiceBox, classChoiceBox);
+        unit.setSquadName(redSquad.toString());
+        redSquad.addUnit(unit);
     }
 
-    private static ArrayList<String> getRaces(){
-        ArrayList<String> races = new ArrayList<>();
-        for(Race race: Race.values()) races.add(race.name);
-        return races;
+    public static void addToBlueSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
+        if (blueSquad == null || !blueSquad.toString().equals(name)) blueSquad = new Squad(name);
+        Unit unit = createUnit(raceChoiceBox, classChoiceBox);
+        unit.setSquadName(blueSquad.toString());
+        blueSquad.addUnit(unit);
+    }
+
+    private static Unit createUnit(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox) {
+        Race ourRace = (Race) raceChoiceBox.getValue();
+        Unit unit = new Warrior(ourRace);
+        if (classChoiceBox.getValue().equals("Лучник")) unit = new Archer(ourRace);
+        if (classChoiceBox.getValue().equals("Маг")) unit = new Mage(ourRace);
+        return unit;
+    }
+
+    public static ArrayList<String> provideUnitCard(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Раса: " + raceChoiceBox.getValue());
+        list.add("\nКласс: " + classChoiceBox.getValue());
+        Unit unit = createUnit(raceChoiceBox, classChoiceBox);
+        list.add("\nЗдоровье: " + unit.getVitality());
+        list.add("\nСила: " + unit.getStrength());
+        list.add("\nЛовкость: " + unit.getDexterity());
+        list.add("\nИнтеллект: " + unit.getIntelligence());
+        list.add("\nЗащита: " + unit.getDefense());
+        list.add("\nСопротивление: " + unit.getResistance());
+        return list;
+    }
+
+    public static Squad getRedSquad() {
+        return redSquad;
+    }
+
+    public static Squad getBlueSquad() {
+        return blueSquad;
     }
 }

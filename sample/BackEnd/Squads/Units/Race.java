@@ -18,4 +18,10 @@ public enum Race {
         this.dexterity = dexterity;
         this.intelligence = intelligence;
     }
+
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
