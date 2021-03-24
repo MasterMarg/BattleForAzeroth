@@ -27,4 +27,6 @@ public interface Unit {
     int getResistance();
 
     String getClassName();
+
+    int getCriticalChance();
 }

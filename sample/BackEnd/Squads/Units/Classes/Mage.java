@@ -112,4 +112,8 @@ public class Mage implements Unit, Cloneable {
     public String getClassName(){
         return this.className;
     }
+
+    public int getCriticalChance(){
+        return (int)(5 * this.race.intelligence * intelligenceModifier / 10);
+    }
 }
