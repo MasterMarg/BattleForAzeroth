@@ -104,8 +104,8 @@ public class Battle {
     }
 
     public static String addToRedSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
-        if (raceChoiceBox.getValue() == null) return "Выберите расу!";
-        if (classChoiceBox.getValue() == null) return "Выберите класс!";
+        if (raceChoiceBox.getValue().equals("Раса")) return "Выберите расу!";
+        if (classChoiceBox.getValue().equals("Класс")) return "Выберите класс!";
         if (redSquad == null || !redSquad.toString().equals(name)) redSquad = new Squad(name);
         Unit unit = createUnit(raceChoiceBox, classChoiceBox);
         redSquad.addUnit(unit);
@@ -113,8 +113,8 @@ public class Battle {
     }
 
     public static String addToBlueSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
-        if (raceChoiceBox.getValue() == null) return "Выберите расу!";
-        if (classChoiceBox.getValue() == null) return "Выберите класс!";
+        if (raceChoiceBox.getValue().equals("Раса")) return "Выберите расу!";
+        if (classChoiceBox.getValue().equals("Класс")) return "Выберите класс!";
         if (blueSquad == null || !blueSquad.toString().equals(name)) blueSquad = new Squad(name);
         Unit unit = createUnit(raceChoiceBox, classChoiceBox);
         blueSquad.addUnit(unit);
