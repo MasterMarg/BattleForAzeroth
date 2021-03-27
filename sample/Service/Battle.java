@@ -106,19 +106,29 @@ public class Battle {
     public static String addToRedSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
         if (raceChoiceBox.getValue().equals("Раса")) return "Выберите расу!";
         if (classChoiceBox.getValue().equals("Класс")) return "Выберите класс!";
-        if (redSquad == null || !redSquad.toString().equals(name)) redSquad = new Squad(name);
+        if (redSquad == null) redSquad = new Squad(name);
+        boolean isNameChanged = !redSquad.toString().equals(name);
+        if (isNameChanged) redSquad = new Squad(name);
         Unit unit = createUnit(raceChoiceBox, classChoiceBox);
         redSquad.addUnit(unit);
-        return unit.getClassName() + " добавлен в первый отряд.";
+        String output = "";
+        if (isNameChanged) output += "Название отряда было изменено, был создан новый отряд.\n";
+        output += unit.getClassName() + " добавлен в первый отряд.";
+        return output;
     }
 
     public static String addToBlueSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
         if (raceChoiceBox.getValue().equals("Раса")) return "Выберите расу!";
         if (classChoiceBox.getValue().equals("Класс")) return "Выберите класс!";
-        if (blueSquad == null || !blueSquad.toString().equals(name)) blueSquad = new Squad(name);
+        if (blueSquad == null) blueSquad = new Squad(name);
+        boolean isNameChanged = !blueSquad.toString().equals(name);
+        if (isNameChanged) blueSquad = new Squad(name);
         Unit unit = createUnit(raceChoiceBox, classChoiceBox);
         blueSquad.addUnit(unit);
-        return unit.getClassName() + " добавлен во второй отряд.";
+        String output = "";
+        if (isNameChanged) output += "Название отряда было изменено, был создан новый отряд.\n";
+        output += unit.getClassName() + " добавлен во второй отряд.";
+        return output;
     }
 
     public static Unit createUnit(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox) {
