@@ -13,29 +13,6 @@ public class Squad implements Cloneable {
     public Squad(String name) {
         this.name = name;
         this.units = new ArrayList<>();
-        /*int initialSize = (int) (Math.random() * 21) + 40;
-        for (int index = 0; index < initialSize; index++) {
-            switch ((int) (Math.random() * 3)) {
-                case 0: {
-                    Unit unit = new Warrior(Race.values()[(int) (Math.random() * Race.values().length)]);
-                    unit.setSquadName(this.name);
-                    this.units.add(unit);
-                    break;
-                }
-                case 1: {
-                    Unit unit = new Archer(Race.values()[(int) (Math.random() * Race.values().length)]);
-                    unit.setSquadName(this.name);
-                    this.units.add(unit);
-                    break;
-                }
-                case 2: {
-                    Unit unit = new Mage(Race.values()[(int) (Math.random() * Race.values().length)]);
-                    unit.setSquadName(this.name);
-                    this.units.add(unit);
-                    break;
-                }
-            }
-        }*/
     }
 
     @Override

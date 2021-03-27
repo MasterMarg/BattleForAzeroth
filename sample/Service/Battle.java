@@ -16,7 +16,7 @@ public class Battle {
     public static Squad redSquad;
     public static Squad blueSquad;
 
-    public static ArrayList<String> provideBattle(/*String firstSquad, String secondSquad*/) {
+    public static ArrayList<String> provideBattle() {
         DateHelper dateHelper = new DateHelper();
         ArrayList<String> output = new ArrayList<>();
         output.add(dateHelper.getFormattedStartDate() +
@@ -75,6 +75,34 @@ public class Battle {
         return (!pattern.matcher(name).matches());
     }
 
+    public static String generateSquads(String firstSquad, String secondSquad) {
+        redSquad = generateSquad(firstSquad);
+        blueSquad = generateSquad(secondSquad);
+        return "Отряды сгенерированы!";
+    }
+
+    private static Squad generateSquad(String name) {
+        Squad squad = new Squad(name);
+        int initialSize = (int) (Math.random() * 21) + 40;
+        for (int index = 0; index < initialSize; index++) {
+            switch ((int) (Math.random() * 3)) {
+                case 0: {
+                    squad.addUnit(new Warrior(Race.values()[(int) (Math.random() * Race.values().length)]));
+                    break;
+                }
+                case 1: {
+                    squad.addUnit(new Archer(Race.values()[(int) (Math.random() * Race.values().length)]));
+                    break;
+                }
+                case 2: {
+                    squad.addUnit(new Mage(Race.values()[(int) (Math.random() * Race.values().length)]));
+                    break;
+                }
+            }
+        }
+        return squad;
+    }
+
     public static String addToRedSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
         if (raceChoiceBox.getValue() == null) return "Выберите расу!";
         if (classChoiceBox.getValue() == null) return "Выберите класс!";
@@ -84,7 +112,7 @@ public class Battle {
         return unit.getClassName() + " добавлен в первый отряд.";
     }
 
-    public static String  addToBlueSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
+    public static String addToBlueSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
         if (raceChoiceBox.getValue() == null) return "Выберите расу!";
         if (classChoiceBox.getValue() == null) return "Выберите класс!";
         if (blueSquad == null || !blueSquad.toString().equals(name)) blueSquad = new Squad(name);
@@ -127,9 +155,11 @@ public class Battle {
     }
 
     public static void reviveTheFallen() {
-        for (Unit unit : redSquad.getUnits())
-            unit.restoreUnit();
-        for (Unit unit : blueSquad.getUnits())
-            unit.restoreUnit();
+        if (redSquad != null)
+            for (Unit unit : redSquad.getUnits())
+                unit.restoreUnit();
+        if (blueSquad != null)
+            for (Unit unit : blueSquad.getUnits())
+                unit.restoreUnit();
     }
 }
