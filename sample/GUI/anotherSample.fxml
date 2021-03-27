@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="97.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.AnotherController">
+    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="451.0" text="Данная опция уничтожит все ранее созданные отряды!" textAlignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
+    <HBox prefHeight="71.0" prefWidth="423.0" VBox.vgrow="ALWAYS">
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+            <Button fx:id="acceptButton" alignment="CENTER" layoutX="97.0" layoutY="13.0" mnemonicParsing="false"
+                    onAction="#pressAccept" text="Принять"/>
+            <Button fx:id="cancelButton" alignment="CENTER" layoutX="294.6" layoutY="13.0" mnemonicParsing="false"
+                    onAction="#pressCancel" text="Отмена"/>
+        </AnchorPane>
+    </HBox>
+</VBox>
