@@ -3,6 +3,8 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.Controller">
    <HBox prefHeight="18.0" prefWidth="600.0">
@@ -31,11 +33,19 @@
    </HBox>
    <HBox prefHeight="102.0" prefWidth="600.0">
       <VBox prefHeight="108.0" prefWidth="232.0">
-         <ChoiceBox fx:id="raceChoiceBox" onAction="#getUnitInfo" prefWidth="150.0">
+         <ChoiceBox fx:id="raceChoiceBox" value="Раса" onAction="#getUnitInfo" prefWidth="150.0">
             <VBox.margin>
                <Insets bottom="3.0" left="3.0" />
             </VBox.margin></ChoiceBox>
-         <ChoiceBox fx:id="classChoiceBox" onAction="#getUnitInfo" prefWidth="150.0">
+         <ChoiceBox fx:id="classChoiceBox" value="Класс" onAction="#getUnitInfo" prefWidth="150.0">
+             <items>
+                 <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="Класс"/>
+                     <String fx:value="Воин"/>
+                     <String fx:value="Лучник"/>
+                     <String fx:value="Маг"/>
+                 </FXCollections>
+             </items>
             <VBox.margin>
                <Insets bottom="3.0" left="3.0" />
             </VBox.margin></ChoiceBox>

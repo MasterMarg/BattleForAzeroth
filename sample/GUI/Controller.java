@@ -11,9 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.BackEnd.Squads.Units.Race;
 import sample.Service.Battle;
-
 import java.io.File;
-import java.util.Arrays;
 
 public class Controller {
 
@@ -32,8 +30,8 @@ public class Controller {
     public static boolean isTrue;
 
     public void initialize() {
-        raceChoiceBox.setItems(FXCollections.observableArrayList(Arrays.asList(Race.values())));
-        classChoiceBox.setItems(FXCollections.observableArrayList("Воин", "Лучник", "Маг"));
+        raceChoiceBox.setItems(FXCollections.observableArrayList("Раса", Race.HUMAN, Race.WOOD_ELF,
+                Race.HIGH_ELF, Race.DWARF, Race.ORC));
     }
 
     private String getFirstSquadName() {
@@ -65,11 +63,12 @@ public class Controller {
     }
 
     public void getUnitInfo() {
-        if (raceChoiceBox.getValue() != null && classChoiceBox.getValue() != null) {
+        if (!raceChoiceBox.getValue().equals("Раса") && !classChoiceBox.getValue().equals("Класс")) {
             unitCardArea.clear();
             for (String string : Battle.provideUnitCard(raceChoiceBox, classChoiceBox))
                 unitCardArea.appendText(string);
         }
+        else unitCardArea.clear();
     }
 
     public void addToFirstSquad() {
@@ -100,7 +99,7 @@ public class Controller {
             secondaryStage.setResizable(false);
             secondaryStage.initModality(Modality.APPLICATION_MODAL);
             secondaryStage.showAndWait();
-            if(isTrue) outputWindow.setText(Battle.generateSquads(getFirstSquadName(), getSecondSquadName()));
+            if (isTrue) outputWindow.setText(Battle.generateSquads(getFirstSquadName(), getSecondSquadName()));
         }
     }
 
