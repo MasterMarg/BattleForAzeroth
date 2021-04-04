@@ -26,6 +26,8 @@ public class Controller {
     private ChoiceBox classChoiceBox;
     @FXML
     private TextArea unitCardArea;
+    @FXML
+    private TextArea unitCardArea1;
     public static boolean isTrue;
 
     public void initialize() {
@@ -59,9 +61,14 @@ public class Controller {
 
     public void getUnitInfo() {
         if (!raceChoiceBox.getValue().equals("Раса") && !classChoiceBox.getValue().equals("Класс")) {
-            unitCardArea.setText(Battle.provideUnitCard((Race) raceChoiceBox.getValue(),
-                    (String) classChoiceBox.getValue()));
-        } else unitCardArea.clear();
+            String[] temp = Battle.provideUnitCard((Race) raceChoiceBox.getValue(),
+                    (String) classChoiceBox.getValue());
+            unitCardArea.setText(temp[0]);
+            unitCardArea1.setText(temp[1]);
+        } else {
+            unitCardArea.clear();
+            unitCardArea1.clear();
+        }
     }
 
     public void addToFirstSquad() {

@@ -133,7 +133,8 @@ public class Battle {
         return unit;
     }
 
-    public static String provideUnitCard(Race race, String classType) {
+    public static String[] provideUnitCard(Race race, String classType) {
+        String[] temp = new String[2];
         StringBuilder list = new StringBuilder();
         list.append("Раса: ").append(race);
         list.append("\nКласс: ").append(classType);
@@ -142,12 +143,15 @@ public class Battle {
         list.append("\nСила: ").append(unit.getStrength());
         list.append("\nЛовкость: ").append(unit.getDexterity());
         list.append("\nИнтеллект: ").append(unit.getIntelligence());
-        list.append("\nЗдоровье: ").append(unit.getVitality());
+        temp[0] = list.toString();
+        list = new StringBuilder();
+        list.append("Здоровье: ").append(unit.getVitality());
         list.append("\nУрон: ").append(unit.attack()[0]);
         list.append("\nШанс критического удара: ").append(unit.getCriticalChance()).append("%");
         list.append("\nЗащита: ").append(unit.getDefense());
         list.append("\nСопротивление: ").append(unit.getResistance());
-        return list.toString();
+        temp[1] = list.toString();
+        return temp;
     }
 
     public static Squad getRedSquad() {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.Controller">
    <HBox prefHeight="18.0" prefWidth="600.0">
@@ -31,19 +31,19 @@
          </HBox.margin>
       </Button>
    </HBox>
-   <HBox prefHeight="102.0" prefWidth="600.0">
+   <HBox prefHeight="102.0" prefWidth="620.0">
       <VBox prefHeight="108.0" prefWidth="232.0">
-         <ChoiceBox fx:id="raceChoiceBox" value="Раса" onAction="#getUnitInfo" prefWidth="150.0">
+         <ChoiceBox fx:id="raceChoiceBox" onAction="#getUnitInfo" prefWidth="150.0" value="Раса">
             <VBox.margin>
                <Insets bottom="3.0" left="3.0" />
             </VBox.margin></ChoiceBox>
-         <ChoiceBox fx:id="classChoiceBox" value="Класс" onAction="#getUnitInfo" prefWidth="150.0">
+         <ChoiceBox fx:id="classChoiceBox" onAction="#getUnitInfo" prefWidth="150.0" value="Класс">
              <items>
                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Класс"/>
-                     <String fx:value="Воин"/>
-                     <String fx:value="Лучник"/>
-                     <String fx:value="Маг"/>
+                     <String fx:value="Класс" />
+                     <String fx:value="Воин" />
+                     <String fx:value="Лучник" />
+                     <String fx:value="Маг" />
                  </FXCollections>
              </items>
             <VBox.margin>
@@ -58,12 +58,17 @@
                <Insets left="3.0" />
             </VBox.margin></Button>
       </VBox>
-      <TextArea fx:id="unitCardArea" editable="false" nodeOrientation="LEFT_TO_RIGHT" prefColumnCount="2" prefRowCount="6" promptText="Информация о выбранном юните" HBox.hgrow="ALWAYS">
+      <TextArea fx:id="unitCardArea" editable="false" nodeOrientation="LEFT_TO_RIGHT" prefColumnCount="2" prefHeight="112.0" prefRowCount="6" prefWidth="75.0" promptText="Информация о выбранном юните" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets left="3.0" right="3.0" />
          </HBox.margin></TextArea>
+      <TextArea fx:id="unitCardArea1" prefHeight="112.0" prefWidth="75.0" promptText="Информация о выбранном юните" HBox.hgrow="ALWAYS">
+         <HBox.margin>
+            <Insets right="3.0" />
+         </HBox.margin>
+      </TextArea>
    </HBox>
-   <TextArea fx:id="outputWindow" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Ждем начала битвы..." VBox.vgrow="ALWAYS">
+   <TextArea fx:id="outputWindow" editable="false" prefHeight="242.0" prefWidth="614.0" promptText="Ждем начала битвы..." VBox.vgrow="ALWAYS">
       <VBox.margin>
          <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
       </VBox.margin></TextArea>
