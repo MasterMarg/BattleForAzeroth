@@ -13,9 +13,9 @@ public class Battle {
     public static Squad redSquad;
     public static Squad blueSquad;
 
-    public static StringBuffer provideBattle() {
+    public static String provideBattle() {
         DateHelper dateHelper = new DateHelper();
-        StringBuffer output = new StringBuffer();
+        StringBuilder output = new StringBuilder();
         output.append(dateHelper.getFormattedStartDate()).append("\nБитва началась!\n");
         while (redSquad.hasAliveUnits() && blueSquad.hasAliveUnits()) {
             output.append(makeAttack(redSquad, blueSquad, dateHelper));
@@ -26,11 +26,11 @@ public class Battle {
             output.append("\nПобедил ").append(redSquad.toString()).append(" отряд.");
         else output.append("\nПобедил ").append(blueSquad.toString()).append(" отряд.");
         output.append("\n" + "Битва продолжалась ").append(dateHelper.getFormattedDiff());
-        return output;
+        return output.toString();
     }
 
-    private static StringBuffer makeAttack(Squad squad1, Squad squad2, DateHelper dateHelper) {
-        StringBuffer attackLog = new StringBuffer();
+    private static String makeAttack(Squad squad1, Squad squad2, DateHelper dateHelper) {
+        StringBuilder attackLog = new StringBuilder();
         attackLog.append("\n").append(dateHelper.getDate());
         Unit unit1 = squad1.getRandomUnit();
         Unit unit2 = squad2.getRandomUnit();
@@ -51,7 +51,7 @@ public class Battle {
                 append(reformString(vitality)).append(" здоровья.\n");
         if (!unit2.isAlive()) attackLog.append("Боец убит.\n");
         if (squad2.hasAliveUnits()) dateHelper.skipTime();
-        return attackLog;
+        return attackLog.toString();
     }
 
     private static String reformString(int input) {

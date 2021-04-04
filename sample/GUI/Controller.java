@@ -56,7 +56,7 @@ public class Controller {
         else if (Battle.getBlueSquad() == null || !Battle.getBlueSquad().hasAliveUnits()
                 || !Battle.getBlueSquad().toString().equals(getSecondSquadName()))
             outputWindow.setText("Во втором отряде недостаточно бойцов!");
-        else outputWindow.setText(Battle.provideBattle().toString());
+        else outputWindow.setText(Battle.provideBattle());
     }
 
     public void getUnitInfo() {
