@@ -11,7 +11,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.BackEnd.Squads.Units.Race;
 import sample.Service.Battle;
-import java.io.File;
 
 public class Controller {
 
@@ -55,20 +54,14 @@ public class Controller {
         else if (Battle.getBlueSquad() == null || !Battle.getBlueSquad().hasAliveUnits()
                 || !Battle.getBlueSquad().toString().equals(getSecondSquadName()))
             outputWindow.setText("Во втором отряде недостаточно бойцов!");
-        else {
-            outputWindow.clear();
-            for (String string : Battle.provideBattle())
-                outputWindow.appendText(string);
-        }
+        else outputWindow.setText(Battle.provideBattle().toString());
     }
 
     public void getUnitInfo() {
         if (!raceChoiceBox.getValue().equals("Раса") && !classChoiceBox.getValue().equals("Класс")) {
-            unitCardArea.clear();
-            for (String string : Battle.provideUnitCard(raceChoiceBox, classChoiceBox))
-                unitCardArea.appendText(string);
-        }
-        else unitCardArea.clear();
+            unitCardArea.setText(Battle.provideUnitCard((Race) raceChoiceBox.getValue(),
+                    (String) classChoiceBox.getValue()));
+        } else unitCardArea.clear();
     }
 
     public void addToFirstSquad() {
@@ -77,9 +70,10 @@ public class Controller {
                     "Знаки препинания и пробелы в именах запрещены!");
         else if (getFirstSquadName().equals(getSecondSquadName()))
             outputWindow.setText("Ошибка! Имена отрядов должны различаться!");
-        else {
-            outputWindow.setText(Battle.addToRedSquad(raceChoiceBox, classChoiceBox, getFirstSquadName()));
-        }
+        else if (raceChoiceBox.getValue().equals("Раса")) outputWindow.setText("Выберите расу!");
+        else if (classChoiceBox.getValue().equals("Класс")) outputWindow.setText("Выберите класс!");
+        else outputWindow.setText(Battle.addToRedSquad((Race) raceChoiceBox.getValue(),
+                    (String) classChoiceBox.getValue(), getFirstSquadName()));
     }
 
     public void generateSquads() throws Exception {
@@ -109,9 +103,10 @@ public class Controller {
                     "Знаки препинания и пробелы в именах запрещены!");
         else if (getFirstSquadName().equals(getSecondSquadName()))
             outputWindow.setText("Ошибка! Имена отрядов должны различаться!");
-        else {
-            outputWindow.setText(Battle.addToBlueSquad(raceChoiceBox, classChoiceBox, getSecondSquadName()));
-        }
+        else if (raceChoiceBox.getValue().equals("Раса")) outputWindow.setText("Выберите расу!");
+        else if (classChoiceBox.getValue().equals("Класс")) outputWindow.setText("Выберите класс!");
+        else outputWindow.setText(Battle.addToBlueSquad((Race) raceChoiceBox.getValue(),
+                    (String) classChoiceBox.getValue(), getSecondSquadName()));
     }
 
     public void reviveTheFallen() {

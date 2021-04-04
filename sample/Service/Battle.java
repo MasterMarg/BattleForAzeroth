@@ -1,6 +1,5 @@
 package sample.Service;
 
-import javafx.scene.control.ChoiceBox;
 import sample.BackEnd.DateHelper;
 import sample.BackEnd.Squads.Squad;
 import sample.BackEnd.Squads.Units.Classes.Archer;
@@ -8,49 +7,49 @@ import sample.BackEnd.Squads.Units.Classes.Mage;
 import sample.BackEnd.Squads.Units.Classes.Warrior;
 import sample.BackEnd.Squads.Units.Race;
 import sample.BackEnd.Squads.Units.Unit;
-
-import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Battle {
     public static Squad redSquad;
     public static Squad blueSquad;
 
-    public static ArrayList<String> provideBattle() {
+    public static StringBuffer provideBattle() {
         DateHelper dateHelper = new DateHelper();
-        ArrayList<String> output = new ArrayList<>();
-        output.add(dateHelper.getFormattedStartDate() +
-                "\nБитва началась!\n");
+        StringBuffer output = new StringBuffer();
+        output.append(dateHelper.getFormattedStartDate()).append("\nБитва началась!\n");
         while (redSquad.hasAliveUnits() && blueSquad.hasAliveUnits()) {
-            output.addAll(makeAttack(redSquad, blueSquad, dateHelper));
+            output.append(makeAttack(redSquad, blueSquad, dateHelper));
             if (blueSquad.hasAliveUnits())
-                output.addAll(makeAttack(blueSquad, redSquad, dateHelper));
+                output.append(makeAttack(blueSquad, redSquad, dateHelper));
         }
         if (redSquad.hasAliveUnits())
-            output.add("\nПобедил " + redSquad.toString() + " отряд.");
-        else output.add("\nПобедил " + blueSquad.toString() + " отряд.");
-        output.add("\n" + "Битва продолжалась " +
-                dateHelper.getFormattedDiff());
+            output.append("\nПобедил ").append(redSquad.toString()).append(" отряд.");
+        else output.append("\nПобедил ").append(blueSquad.toString()).append(" отряд.");
+        output.append("\n" + "Битва продолжалась ").append(dateHelper.getFormattedDiff());
         return output;
     }
 
-    private static ArrayList<String> makeAttack(Squad squad1, Squad squad2, DateHelper dateHelper) {
-        ArrayList<String> attackLog = new ArrayList<>();
-        attackLog.add("\n" + dateHelper.getDate());
+    private static StringBuffer makeAttack(Squad squad1, Squad squad2, DateHelper dateHelper) {
+        StringBuffer attackLog = new StringBuffer();
+        attackLog.append("\n").append(dateHelper.getDate());
         Unit unit1 = squad1.getRandomUnit();
         Unit unit2 = squad2.getRandomUnit();
-        attackLog.add("\n" + unit1 + unit1.getUnitVitalityCard() + " атакует " + unit2 + unit2.getUnitVitalityCard());
+        attackLog.append("\n").append(unit1).append(unit1.getUnitVitalityCard()).append(" атакует ").
+                append(unit2).append(unit2.getUnitVitalityCard());
         int[] attackData = unit1.attack();
         int vitality = unit2.getCurrentVitality();
         int damage = unit2.takeDamage(unit1, attackData[0]);
-        attackLog.add("\n" + unit1 + " наносит " + attackData[0] + "(-" + (attackData[0] - damage) + ")" +
-                reformString(attackData[0]) + " урона.");
+        attackLog.append("\n").append(unit1).append(" наносит ").append(attackData[0]).append("(-").
+                append(attackData[0] - damage).append(")").append(reformString(attackData[0])).
+                append(" урона.");
         if (attackData[1] == 1)
-            attackLog.add(" Критический удар!");
+            attackLog.append(" Критический удар!");
         if (unit2.isAlive())
-            attackLog.add("\n" + unit2 + " теряет " + damage + reformString(damage) + " здоровья.\n");
-        else attackLog.add("\n" + unit2 + " теряет " + vitality + reformString(vitality) + " здоровья.\n");
-        if (!unit2.isAlive()) attackLog.add("Боец убит.\n");
+            attackLog.append("\n").append(unit2).append(" теряет ").append(damage).
+                    append(reformString(damage)).append(" здоровья.\n");
+        else attackLog.append("\n").append(unit2).append(" теряет ").append(vitality).
+                append(reformString(vitality)).append(" здоровья.\n");
+        if (!unit2.isAlive()) attackLog.append("Боец убит.\n");
         if (squad2.hasAliveUnits()) dateHelper.skipTime();
         return attackLog;
     }
@@ -103,57 +102,52 @@ public class Battle {
         return squad;
     }
 
-    public static String addToRedSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
-        if (raceChoiceBox.getValue().equals("Раса")) return "Выберите расу!";
-        if (classChoiceBox.getValue().equals("Класс")) return "Выберите класс!";
+    public static String addToRedSquad(Race race, String classType, String name) {
         if (redSquad == null) redSquad = new Squad(name);
         boolean isNameChanged = !redSquad.toString().equals(name);
         if (isNameChanged) redSquad = new Squad(name);
-        Unit unit = createUnit(raceChoiceBox, classChoiceBox);
+        Unit unit = createUnit(race, classType);
         redSquad.addUnit(unit);
-        String output = "";
-        if (isNameChanged) output += "Название отряда было изменено, был создан новый отряд.\n";
-        output += unit.getClassName() + " добавлен в первый отряд.";
-        return output;
+        StringBuilder output = new StringBuilder();
+        if (isNameChanged) output.append("Название отряда было изменено, был создан новый отряд.\n");
+        output.append(unit.getClassName()).append(" добавлен в первый отряд.");
+        return output.toString();
     }
 
-    public static String addToBlueSquad(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox, String name) {
-        if (raceChoiceBox.getValue().equals("Раса")) return "Выберите расу!";
-        if (classChoiceBox.getValue().equals("Класс")) return "Выберите класс!";
+    public static String addToBlueSquad(Race race, String classType, String name) {
         if (blueSquad == null) blueSquad = new Squad(name);
         boolean isNameChanged = !blueSquad.toString().equals(name);
         if (isNameChanged) blueSquad = new Squad(name);
-        Unit unit = createUnit(raceChoiceBox, classChoiceBox);
+        Unit unit = createUnit(race, classType);
         blueSquad.addUnit(unit);
-        String output = "";
-        if (isNameChanged) output += "Название отряда было изменено, был создан новый отряд.\n";
-        output += unit.getClassName() + " добавлен во второй отряд.";
-        return output;
+        StringBuilder output = new StringBuilder();
+        if (isNameChanged) output.append("Название отряда было изменено, был создан новый отряд.\n");
+        output.append(unit.getClassName()).append(" добавлен во второй отряд.");
+        return output.toString();
     }
 
-    public static Unit createUnit(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox) {
-        Race ourRace = (Race) raceChoiceBox.getValue();
-        Unit unit = new Warrior(ourRace);
-        if (classChoiceBox.getValue().equals("Лучник")) unit = new Archer(ourRace);
-        if (classChoiceBox.getValue().equals("Маг")) unit = new Mage(ourRace);
+    public static Unit createUnit(Race race, String classType) {
+        Unit unit = new Warrior(race);
+        if (classType.equals("Лучник")) unit = new Archer(race);
+        if (classType.equals("Маг")) unit = new Mage(race);
         return unit;
     }
 
-    public static ArrayList<String> provideUnitCard(ChoiceBox raceChoiceBox, ChoiceBox classChoiceBox) {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("Раса: " + raceChoiceBox.getValue());
-        list.add("\nКласс: " + classChoiceBox.getValue());
-        Unit unit = createUnit(raceChoiceBox, classChoiceBox);
-        list.add("\nКлассовое имя: " + unit.getClassName());
-        list.add("\nСила: " + unit.getStrength());
-        list.add("\nЛовкость: " + unit.getDexterity());
-        list.add("\nИнтеллект: " + unit.getIntelligence());
-        list.add("\nЗдоровье: " + unit.getVitality());
-        list.add("\nУрон: " + unit.attack()[0]);
-        list.add("\nШанс критического удара: " + unit.getCriticalChance() + "%");
-        list.add("\nЗащита: " + unit.getDefense());
-        list.add("\nСопротивление: " + unit.getResistance());
-        return list;
+    public static String provideUnitCard(Race race, String classType) {
+        StringBuilder list = new StringBuilder();
+        list.append("Раса: ").append(race);
+        list.append("\nКласс: ").append(classType);
+        Unit unit = createUnit(race, classType);
+        list.append("\nКлассовое имя: ").append(unit.getClassName());
+        list.append("\nСила: ").append(unit.getStrength());
+        list.append("\nЛовкость: ").append(unit.getDexterity());
+        list.append("\nИнтеллект: ").append(unit.getIntelligence());
+        list.append("\nЗдоровье: ").append(unit.getVitality());
+        list.append("\nУрон: ").append(unit.attack()[0]);
+        list.append("\nШанс критического удара: ").append(unit.getCriticalChance()).append("%");
+        list.append("\nЗащита: ").append(unit.getDefense());
+        list.append("\nСопротивление: ").append(unit.getResistance());
+        return list.toString();
     }
 
     public static Squad getRedSquad() {
