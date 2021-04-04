@@ -170,4 +170,16 @@ public class Battle {
             for (Unit unit : blueSquad.getUnits())
                 unit.restoreUnit();
     }
+
+    public static String showSquad(Squad squad){
+        StringBuilder builder = new StringBuilder();
+        int number = 1;
+        builder.append("Отряд ").append(squad.toString()).append("\n\n");
+        for (Unit unit : squad.getUnits()) {
+            builder.append(number).append(". ").append(unit.getClassName()).
+                    append(unit.getUnitVitalityCard()).append("\n");
+            number++;
+        }
+        return builder.toString();
+    }
 }

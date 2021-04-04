@@ -125,6 +125,17 @@ public class Controller {
         }
     }
 
+    public void showSquads() {
+        if (Battle.getRedSquad() != null) {
+            outputWindow.setText(Battle.showSquad(Battle.getRedSquad()));
+        }
+        if (Battle.getBlueSquad() != null) {
+            outputWindow.appendText("\n\n" + Battle.showSquad(Battle.getBlueSquad()));
+        }
+        if (Battle.getRedSquad() == null && Battle.getBlueSquad() == null)
+            outputWindow.setText("Отряды еще не созданы!");
+    }
+
     public void makeFirstSquadFieldBetter() {
         firstSquad.clear();
     }
