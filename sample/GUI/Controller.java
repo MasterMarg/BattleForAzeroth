@@ -93,8 +93,8 @@ public class Controller {
             isTrue = false;
             Stage secondaryStage = new Stage();
             secondaryStage.setTitle("Внимание!");
-            secondaryStage.setScene(new Scene(FXMLLoader.load(new File("src/sample/GUI/anotherSample.fxml").
-                    toURI().toURL()), 450, 125));
+            secondaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(
+                    "anotherSample.fxml")), 450, 125));
             secondaryStage.setAlwaysOnTop(true);
             secondaryStage.setResizable(false);
             secondaryStage.initModality(Modality.APPLICATION_MODAL);
