@@ -70,10 +70,6 @@ public class Warrior implements Unit, Cloneable {
         return " (" + this.getCurrentVitality() + "/" + this.getVitality() + ")";
     }
 
-    public String getUnitVitalityCard(int vitality){
-        return " (" + vitality + "/" + this.getVitality() + ")";
-    }
-
     public int[] attack() {
         int[] output = new int[2];
         if ((Math.random() * 100) < (5 * this.race.dexterity * dexterityModifier / 10)) {
@@ -105,7 +101,23 @@ public class Warrior implements Unit, Cloneable {
         this.squadName = name;
     }
 
-    public String getSquadName() {
-        return this.squadName;
+    public int getDefense(){
+        return this.defense;
+    }
+
+    public int getResistance(){
+        return this.resistance;
+    }
+
+    public String getClassName(){
+        return this.className;
+    }
+
+    public int getCriticalChance(){
+        return (int)(5 * this.race.dexterity * dexterityModifier / 10);
+    }
+
+    public void restoreUnit() {
+        this.currentVitality = this.vitality;
     }
 }

@@ -10,8 +10,6 @@ public interface Unit {
 
     void setSquadName(String name);
 
-    String getSquadName();
-
     int getStrength();
 
     int getDexterity();
@@ -24,5 +22,13 @@ public interface Unit {
 
     String getUnitVitalityCard();
 
-    String getUnitVitalityCard(int vitality);
+    int getDefense();
+
+    int getResistance();
+
+    String getClassName();
+
+    int getCriticalChance();
+
+    void restoreUnit();
 }
