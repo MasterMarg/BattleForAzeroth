@@ -28,11 +28,26 @@ public class Archer implements Unit, Cloneable {
         this.defense = (int) (race.dexterity * dexterityModifier * 2);
         this.resistance = (int) (race.intelligence * intelligenceModifier * 2.5);
         switch (race) {
-            case WOOD_ELF: {this.className = "Мастер лука"; break;}
-            case HIGH_ELF: {this.className = "Эльфийский лучник"; break;}
-            case DWARF: {this.className = "Арбалетчик"; break;}
-            case ORC: {this.className = "Проклятый стрелок"; break;}
-            default: {this.className = "Лучник"; break;}
+            case WOOD_ELF: {
+                this.className = "Мастер лука";
+                break;
+            }
+            case HIGH_ELF: {
+                this.className = "Эльфийский лучник";
+                break;
+            }
+            case DWARF: {
+                this.className = "Арбалетчик";
+                break;
+            }
+            case ORC: {
+                this.className = "Проклятый стрелок";
+                break;
+            }
+            default: {
+                this.className = "Лучник";
+                break;
+            }
         }
     }
 
@@ -82,12 +97,16 @@ public class Archer implements Unit, Cloneable {
     public int takeDamage(Unit unit, int damage) {
         if (unit instanceof Mage) {
             if (damage > this.resistance) {
-                this.currentVitality = this.currentVitality - (damage - this.resistance);
+                if (this.currentVitality > (damage - this.resistance))
+                    this.currentVitality = this.currentVitality - (damage - this.resistance);
+                else this.currentVitality = 0;
                 return damage - this.resistance;
             } else return 0;
         } else {
             if (damage > this.defense) {
-                this.currentVitality = this.currentVitality - (damage - this.defense);
+                if (this.currentVitality > (damage - this.defense))
+                    this.currentVitality = this.currentVitality - (damage - this.defense);
+                else this.currentVitality = 0;
                 return damage - this.defense;
             } else return 0;
         }
@@ -101,20 +120,20 @@ public class Archer implements Unit, Cloneable {
         this.squadName = name;
     }
 
-    public int getDefense(){
+    public int getDefense() {
         return this.defense;
     }
 
-    public int getResistance(){
+    public int getResistance() {
         return this.resistance;
     }
 
-    public String getClassName(){
+    public String getClassName() {
         return this.className;
     }
 
-    public int getCriticalChance(){
-        return (int)(5 * this.race.dexterity * dexterityModifier / 10);
+    public int getCriticalChance() {
+        return (int) (5 * this.race.dexterity * dexterityModifier / 10);
     }
 
     public void restoreUnit() {

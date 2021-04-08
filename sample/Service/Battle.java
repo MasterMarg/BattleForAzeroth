@@ -176,8 +176,10 @@ public class Battle {
         int number = 1;
         builder.append("Отряд ").append(squad.toString()).append("\n\n");
         for (Unit unit : squad.getUnits()) {
-            builder.append(number).append(". ").append(unit.getClassName()).
-                    append(unit.getUnitVitalityCard()).append("\n");
+            builder.append(number).append(". ").append(unit.getClassName());
+            if (unit.isAlive()) builder.append(unit.getUnitVitalityCard());
+            else builder.append(" (мертв)");
+            builder.append("\n");
             number++;
         }
         return builder.toString();
